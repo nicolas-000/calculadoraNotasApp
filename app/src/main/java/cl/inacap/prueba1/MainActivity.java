@@ -90,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
                     datos[i*2+1].setText("");
                     textoPorcentajes[i].setVisibility(View.GONE);
                     botonesEliminar[i].setVisibility(View.GONE);
+                    if (i == 1) {
+                        botonesEliminar[0].setVisibility(View.GONE);
+                    }
                 };
             }
 
@@ -103,6 +106,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        for (int i = 0; i < botonesEliminar.length; i++) {
+            botonesEliminar[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int progreso = cantNotas.getProgress();
+                    datos[progreso].setVisibility(View.GONE);
+                    datos[progreso+1].setVisibility(View.GONE);
+                    cantNotas.setProgress(cantNotas.getProgress()-1);
+                    datos[progreso].setText("");
+                    datos[progreso+1].setText("");
+                    calcularPromedio(datos);
+                }
+            });
+        }
 
         for (int i = 0; i < datos.length; i++) {
             datos[i].setOnFocusChangeListener(new View.OnFocusChangeListener() {
