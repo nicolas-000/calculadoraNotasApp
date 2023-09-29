@@ -112,11 +112,16 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     int progreso = cantNotas.getProgress();
-                    datos[progreso].setVisibility(View.GONE);
-                    datos[progreso+1].setVisibility(View.GONE);
+                    int numBoton = Integer.parseInt(view.getResources().getResourceEntryName(view.getId()).replaceAll("[\\D]", ""));
+                    for (int j = numBoton - 1; j <= progreso + 1; j++ ) {
+                        datos[j*2].setText(datos[(j+1)*2].getText());
+                        datos[j*2+1].setText(datos[(j+1)*2+1].getText());
+                    }
                     cantNotas.setProgress(cantNotas.getProgress()-1);
-                    datos[progreso].setText("");
-                    datos[progreso+1].setText("");
+                    datos[progreso*2].setVisibility(View.GONE);
+                    datos[progreso*2+1].setVisibility(View.GONE);
+                    datos[progreso*2].setText("");
+                    datos[progreso*2+1].setText("");
                     calcularPromedio(datos);
                 }
             });
