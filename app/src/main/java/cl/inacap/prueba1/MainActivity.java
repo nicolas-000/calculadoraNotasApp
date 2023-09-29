@@ -143,18 +143,37 @@ public class MainActivity extends AppCompatActivity {
         double prom = 0.0;
         int ponderacionTotal = 0;
         for (int i = 0; i <= cantNotas.getProgress(); i++) {
-            double nota = 0.0001;
+            double nota = 0.0000000001;
             int ponderacion = 0;
             if (!datos[i*2].getText().toString().matches("")) {
                 nota = Double.parseDouble(datos[i*2].getText().toString());
                 if (nota < 1.0 || nota > 7.0) {
                     Toast.makeText(this,"La nota debe estar entre 1.0 y 7.0", Toast.LENGTH_SHORT).show();
+                    if (nota > 7.0) {
+                        nota = 7.0;
+                        datos[i*2].setText("7.0");
+                    } else {
+                        nota = 1.0;
+                        datos[i*2].setText("1.0");
+                    }
                 }
+            }
+            if (nota < 4.0) {
+                datos[i*2].setTextColor(Color.parseColor("#ff0000"));
+            } else {
+                datos[i*2].setTextColor(Color.parseColor("#0000ff"));
             }
             if (!datos[i*2+1].getText().toString().matches("")) {
                 ponderacion = Integer.parseInt(datos[i*2+1].getText().toString());
-                if (ponderacion > 100 || ponderacion < 1) {
+                if (ponderacion > 100 || ponderacion < 0) {
                     Toast.makeText(this,"La ponderacion debe estar entre 1 y 100", Toast.LENGTH_SHORT).show();
+                    if (ponderacion > 100) {
+                        ponderacion = 100;
+                        datos[i*2+1].setText("100");
+                    } else {
+                        ponderacion = 0;
+                        datos[i*2+1].setText("0");
+                    }
                 }
             }
             ponderacionTotal += ponderacion;
@@ -171,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
         if (prom < 4.0) {
             promedio.setTextColor(Color.parseColor("#ff0000"));
         } else {
-            promedio.setTextColor(Color.parseColor("#00ff00"));
+            promedio.setTextColor(Color.parseColor("#0000ff"));
         }
     }
 }
