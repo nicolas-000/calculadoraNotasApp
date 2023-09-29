@@ -179,13 +179,13 @@ public class MainActivity extends AppCompatActivity {
             ponderacionTotal += ponderacion;
             prom += nota * ponderacion / 100;
         }
-        promedio.setText("" + prom);
+        promedio.setText(String.format("%.2f", prom));
         ponderacionFinal.setText(ponderacionTotal + " %");
         if (ponderacionTotal > 100) {
             ponderacionFinal.setTextColor(Color.parseColor("#ff0000"));
             Toast.makeText(this,"La ponderación final no debe superar el 100%", Toast.LENGTH_SHORT).show();
         } else {
-            ponderacionFinal.setTextColor(getResources().getColor(android.R.color.tab_indicator_text));
+            ponderacionFinal.setTextColor(Color.parseColor("#B5B200"));
         }
         if (prom < 4.0) {
             promedio.setTextColor(Color.parseColor("#ff0000"));
